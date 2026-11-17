@@ -181,14 +181,22 @@
       outline-offset: 2px;
     }
 
-    .address-line {
+    .address-link {
       font-size: 13.5px;
       font-weight: 500;
       color: var(--text);
       margin: 0;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 150ms ease, border-color 150ms ease;
+    }
+
+    .address-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     .hero-meta-grid {
@@ -230,7 +238,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* Full Visible Category Grid (Front of Page - All Categories Visible on Mobile & Desktop) */
+    /* Full Visible Category Grid + Search Bar */
     .category-overview {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -306,7 +314,86 @@
       color: #ffffff;
     }
 
-    /* Compact Sticky Bar (Appears smoothly once scrolled past the full category grid) */
+    /* Search Box below categories */
+    .search-wrap {
+      margin-top: 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      width: 17px;
+      height: 17px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 44px 10px 42px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 16px;
+      line-height: 1.4;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .search-input::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    @media (min-width: 768px) {
+      .search-input {
+        font-size: 15px;
+      }
+    }
+
+    .search-input::placeholder {
+      color: #737373;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 6px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 8px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .search-clear-btn.visible {
+      display: inline-flex;
+    }
+
+    .search-clear-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+
+    /* Compact Sticky Bar */
     .sticky-nav {
       position: fixed;
       top: 0;
@@ -468,6 +555,43 @@
     /* Main Menu Content */
     .menu-main {
       padding: 26px 0 56px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .empty-state-title {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .empty-state-desc {
+      margin: 0 0 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .empty-reset-btn {
+      appearance: none;
+      border: none;
+      background: var(--accent);
+      color: #ffffff;
+      min-height: 42px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .empty-reset-btn:hover {
+      background: var(--accent-hover);
     }
 
     .menu-section {
@@ -738,7 +862,7 @@
       flex-shrink: 0;
     }
 
-    /* Footer & Allergens Legend */
+    /* Footer, Location Directions & Allergens Legend */
     .site-footer {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -766,19 +890,77 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .footer-location-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-bottom: 22px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .footer-location-bar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-address-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-address-text {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .directions-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 18px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      align-self: flex-start;
+      transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease;
+    }
+
+    .directions-btn:hover,
+    .directions-btn:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-tint);
+      outline: none;
+    }
+
     .footer-bottom {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 12px 24px;
+      gap: 10px 24px;
       font-size: 13px;
       color: var(--text-muted);
-    }
-
-    .footer-brand {
-      font-weight: 700;
-      color: var(--text);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -816,12 +998,12 @@
             </svg>
             <span>021 485 9333</span>
           </a>
-          <p class="address-line">
+          <a class="address-link" href="https://www.google.com/maps/dir/?api=1&destination=New+York+Pizza,+Passage+West,+Cork,+Ireland" target="_blank" rel="noopener noreferrer" aria-label="Get directions to New York Pizza, Passage West, Cork on Google Maps">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
             </svg>
             <span>NEW YORK PIZZA, PASSAGEWEST. CORK</span>
-          </p>
+          </a>
         </div>
       </div>
 
@@ -843,13 +1025,29 @@
     </div>
   </header>
 
-  <section class="category-overview" id="category-overview" aria-label="All menu categories">
+  <section class="category-overview" id="category-overview" aria-label="All menu categories and search">
     <div class="container">
       <div class="overview-header">
         <p class="overview-title">MENU CATEGORIES</p>
         <p class="overview-status" id="overview-status"></p>
       </div>
       <div class="overview-grid" id="overview-grid" role="tablist"></div>
+
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input
+          type="search"
+          id="menu-search"
+          class="search-input"
+          placeholder="Search dish or category (e.g. Margherita, Spice Box, Burgers, Curry)..."
+          aria-label="Search dish or category"
+          autocomplete="off"
+        />
+        <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Clear search">&#10005;</button>
+      </div>
     </div>
   </section>
 
@@ -900,9 +1098,32 @@
           14. Molluscs.
         </p>
       </div>
+
+      <div class="footer-location-bar">
+        <div class="footer-address-info">
+          <span class="footer-brand">NEW YORK PIZZA</span>
+          <p class="footer-address-text">
+            <a class="address-link" href="https://www.google.com/maps/dir/?api=1&destination=New+York+Pizza,+Passage+West,+Cork,+Ireland" target="_blank" rel="noopener noreferrer">NEW YORK PIZZA, PASSAGEWEST. CORK</a>
+            · Tel: <a href="tel:0214859333">021 485 9333</a>
+          </p>
+        </div>
+        <a
+          class="directions-btn"
+          href="https://www.google.com/maps/dir/?api=1&destination=New+York+Pizza,+Passage+West,+Cork,+Ireland"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open New York Pizza location in Google Maps for directions"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Google Maps Directions</span>
+        </a>
+      </div>
+
       <div class="footer-bottom">
-        <span class="footer-brand">NEW YORK PIZZA · PASSAGEWEST. CORK</span>
-        <span>Tel: <a href="tel:0214859333">021 485 9333</a> · Open 7 Days 04:00 PM – 11:30 PM</span>
+        <span>NEW YORK PIZZA</span>
+        <span>Open 7 Days: 04:00 PM TO 11:30 PM · Delivery: 5:00 PM - 11:30 PM</span>
       </div>
     </div>
   </footer>
@@ -913,11 +1134,14 @@
       const MENU_DATA = [{"id":"signature-pizza","name":"SIGNATURE PIZZA","subtitle":"Homemade Pizza Dough","type":"cards","items":[{"name":"MARGHERITA","allergens":"1-6-7","desc":"100% Mozzarella Cheese & Our in House Tomato Sauce","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac7.00"],["12\"","\u20ac10"],["14\"","\u20ac13"],["16\"","\u20ac17"]],"img":"pizza_margherita"},{"name":"GARLIC BREAD","allergens":"1-6-7","desc":"Buttery Garlic Base with double Mozzarella Cheese.","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac13"],["16\"","\u20ac17"]],"img":"pizza_garlic_bread"},{"name":"AMERICAN FAVOURITE","allergens":"1-6-7","desc":"Double Pepperoni, Double 100% Mozzarella Cheese","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac8.50"],["12\"","\u20ac11"],["14\"","\u20ac13"],["16\"","\u20ac17"]],"img":"pizza_american_favourite"},{"name":"HAWAIIAN","allergens":"1-6-7","desc":"100% Mozzarella Cheese, Ham, Mushrooms & Pineapple","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac8.50"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_hawaiian"},{"name":"NEW YORK SPECIAL","allergens":"1-6-7-12","desc":"100% Mozzarella Cheese, Peppers, Pepperoni, Meatballs & Mushrooms","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_new_york_special"},{"name":"MEAT & MEAT","allergens":"1-6-7","desc":"100% Mozzarella Cheese, Pepperoni Crispy Bacon & Roasted Chicken.","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_meat_and_meat"},{"name":"MEXICAN PASSION","allergens":"1-6-7","desc":"100% Mozzarella Cheese, Cajun Chicken, Pepper, Pineapple & Jalapeno","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_mexican_passion"},{"name":"MEATBALL FEAST","allergens":"1-6-7-9-10","desc":"100% Mozzarella Cheese, BBQ Sauce, Meat Balls, Pepperoni & Cajun Chicken","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_meatball_feast"},{"name":"HOT ONE","allergens":"1-6-7","desc":"100% Mozzarella Cheese, Pepperoni, Pepper, Chilli Flakes, Jalapeno, Chilli Beef.","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_hot_one"},{"name":"VEG OUT","allergens":"1-6-7","desc":"100% Mozzarella Cheese, Sweet Corn, Red Onion Mushrooms & Pepper","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_veg_out"},{"name":"OWN CHOICE PIZZA","allergens":"","desc":"Any 3 Toppings","prices":[["7\"","\u20ac5.50"],["10\"","\u20ac9.00"],["12\"","\u20ac11"],["14\"","\u20ac14"],["16\"","\u20ac18"]],"img":"pizza_own_choice"},{"name":"GLUTEN FREE PIZZA","allergens":"","desc":"Available in 12\" Gluten Free Base","prices":[["12\"","\u20ac13.95"]],"img":"pizza_gluten_free"}],"extraNote":{"title":"Add Extra Toppings","pricing":"7\", 10\" & 12\" - \u20ac1.00  \u00b7  14\", 16\" - \u20ac2.00","details":"Toppings: Pepperoni, Ham, Crispy Bacon, Roasted Chicken, Tandoori Chicken, Cajun Chicken, Chilli Beef, Meatballs, Fresh Tomato, Black Olives, Sweet Corn, Onion, Jalapeno, Pineapple, Fresh Peppers"}},{"id":"pizza-deals","name":"PIZZA DEALS","subtitle":"","type":"cards","items":[{"name":"PIZZA DEAL 1","allergens":"","desc":"1x 10\" Pizza with 2 Toppings, 1x Chips + 1x Drink 330ml","price":"\u20ac10.00","img":"pizza_deal_1"},{"name":"PIZZA DEAL 2","allergens":"","desc":"1x 12\" Pizza with 3 Toppings, 1x Chips + 1x Drink 330ml","price":"\u20ac15.00","img":"pizza_deal_2"},{"name":"PIZZA DEAL 3","allergens":"","desc":"1x 14\" Pizza with 3 Toppings + 7\" Garlic Bread + Garlic Dip + Chips or Wedges + 2 Can 330ml","price":"\u20ac24.00","img":"pizza_deal_3"},{"name":"PIZZA DEAL 4","allergens":"","desc":"1x 16\" Pizza with 3 Toppings, 1x 7\" Garlic Bread + Chicken Goujon, 1x Chips + 1x Sharing Drink","price":"\u20ac28.00","img":"pizza_deal_4"}]},{"id":"burgers","name":"BURGERS","subtitle":"100% Irish Beef & Crispy Chicken","type":"cards","items":[{"name":"BREAST IN A BUN","allergens":"1-3-6-10-11","desc":"","price":"\u20ac6.50","img":"burger_breast_in_bun"},{"name":"CHICKEN BURGER","allergens":"1-3-6-10-11","desc":"","price":"\u20ac5.50","img":"burger_chicken"},{"name":"HAM BURGER","allergens":"1-3-6-10-11","desc":"","price":"\u20ac3.50","img":"burger_ham"},{"name":"CHEESE BURGER","allergens":"1-3-6-7-10-11","desc":"","price":"\u20ac4.00","img":"burger_cheese"},{"name":"DOUBLE BACON CHEESE BURGER","allergens":"1-3-6-7-10-11","desc":"","price":"\u20ac5.50","img":"burger_double_bacon_cheese"},{"name":"1/4 POUNDER BEEF","allergens":"1-3-10-11","desc":"","price":"\u20ac6.00","img":"burger_quarter_pounder"},{"name":"1/2 POUNDER BEEF","allergens":"1-3-10-11","desc":"","price":"\u20ac8.00","img":"burger_half_pounder"},{"name":"VEG BURGER","allergens":"1-3-6-10-11","desc":"","price":"\u20ac5.00","img":"burger_veg"}]},{"id":"burger-deals","name":"BURGER DEALS","subtitle":"","type":"cards","items":[{"name":"DEAL 1","allergens":"","desc":"Breast in a Bun + Chips + Coke 330 ml can","price":"\u20ac9.95","img":"burger_deal_1"},{"name":"DEAL 2","allergens":"","desc":"Chicken Burger + Chips + Coke 330 ml can","price":"\u20ac9.50","img":"burger_deal_2"},{"name":"DEAL 3","allergens":"","desc":"1/4Pounder + Chips + Coke330mlcan","price":"\u20ac9.50","img":"burger_deal_3"},{"name":"DEAL 4","allergens":"","desc":"Chicken Goujon + Chips + 330ml Can","price":"\u20ac9.00","img":"burger_deal_4"}]},{"id":"baguettes","name":"BAGUETTES","subtitle":"CHIPS + 330ml DRINK","type":"cards","items":[{"name":"STEAK BAGUETTE","allergens":"1-3-10","desc":"Tender Steak, Mozzarella Cheese, Onion and Pepper, Mayo/Sweet Chilli Sauce.","price":"\u20ac9.95","img":"baguette_steak"},{"name":"CHICKEN BAGUETTE","allergens":"1-3-10","desc":"Roasted Chicken, Mozzarella Cheese, Onion and Pepper, Mayo/Sweet Chilli Sauce.","price":"\u20ac9.95","img":"baguette_chicken"},{"name":"CH. GOUJON BAGUETTE","allergens":"1-3-10","desc":"Chicken Goujon, Mozzarella Cheese, Onion and Pepper, Mayo/Sweet Chilli Sauce.","price":"\u20ac9.95","img":"baguette_goujon"},{"name":"SMOKEY BACON CH. BAGUETTE","allergens":"1-9-10","desc":"Smokey Bacon, Roasted Chicken, BBQ Sauce, Mozzarella Cheese, Onion and Pepper.","price":"\u20ac9.95","img":"baguette_smokey_bacon"},{"name":"TORPEDO BAGUETTE","allergens":"1-3-10","desc":"Beef Mince, Mozzarella, Onion and Pepper, Mayo-Sweet Chilli Sauce.","price":"\u20ac9.95","img":"baguette_torpedo"},{"name":"DONER BAGUETTE","allergens":"1-3-6-10","desc":"Doner Meat, Mozzarella, Onion and Pepper, Mayo-Sweet Chilli Sauce","price":"\u20ac9.95","img":"baguette_doner"}]},{"id":"kebabs","name":"KEBABS","subtitle":"Single \u00b7 Meal \u00b7 Boxes","type":"cards","items":[{"name":"DONER KEBAB","allergens":"1-3-6-7-10","desc":"Juicy Doner,Fresh Naan Bread, Lettuce, Sweet Chilli Sauce & Garlic Sauce.","prices":[["Single","\u20ac10.00"],["Meal","\u20ac13.00"]],"img":"kebab_doner"},{"name":"CHICKEN KEBAB","allergens":"1-3-7-10","desc":"Roasted Chicken, Fresh Naan Bread, Lettuce, Sweet Chilli Sauce & Garlic Sauce.","prices":[["Single","\u20ac11.00"],["Meal","\u20ac13.50"]],"img":"kebab_chicken"},{"name":"CHICKEN TIKKA KEBAB","allergens":"1-3-7-10","desc":"Marinated Chicken Tikka, Fresh Naan Bread, Lettuce, Sweet Chilli Sauce & Garlic Sauce.","prices":[["Single","\u20ac11.00"],["Meal","\u20ac13.50"]],"img":"kebab_chicken_tikka"},{"name":"MIX KEBAB (Chicken + Doner)","allergens":"1-3-6-7-10","desc":"Juicy Doner & Roasted Chicken, Fresh Naan Bread, Lettuce, Sweet Chilli Sauce & Garlic Sauce.","prices":[["Single","\u20ac12.50"],["Meal","\u20ac14.50"]],"img":"kebab_mix"},{"name":"DONER BOX","allergens":"","desc":"","price":"\u20ac10.00","img":"kebab_doner_box"},{"name":"CHICKEN BOX","allergens":"","desc":"","price":"\u20ac11.00","img":"kebab_chicken_box"},{"name":"MIX BOX","allergens":"","desc":"","price":"\u20ac12.50","img":"kebab_mix_box"}]},{"id":"wraps","name":"WRAPS","subtitle":"Single \u00b7 Meal","type":"cards","items":[{"name":"CHICKEN WRAP","allergens":"1-3-7-10","desc":"","prices":[["Single","\u20ac6.00"],["Meal","\u20ac9.00"]],"img":"wrap_chicken"},{"name":"DONER WRAP","allergens":"1-3-6-7-10","desc":"","prices":[["Single","\u20ac6.00"],["Meal","\u20ac9.00"]],"img":"wrap_doner"},{"name":"CHICKEN GOUJON WRAP","allergens":"1-3-7-10","desc":"","prices":[["Single","\u20ac6.00"],["Meal","\u20ac9.50"]],"img":"wrap_goujon"},{"name":"MIX WRAP","allergens":"1-3-6-7-10","desc":"","prices":[["Single","\u20ac6.50"],["Meal","\u20ac9.50"]],"img":"wrap_mix"}]},{"id":"new-arrival","name":"NEW ARRIVAL","subtitle":"","type":"cards","items":[{"name":"SPICE BOX","allergens":"1-6-9-10","desc":"Crispy Shredded Chicken, Grilled peppers, Jalapenos, Chips with spicy seasoning","price":"\u20ac10.95","img":"new_spice_box"},{"name":"3 in 1","allergens":"1-9-10","desc":"Chips, Rice, Curry","price":"\u20ac6.50","img":"new_3_in_1"},{"name":"4 in 1","allergens":"1-3-9-10","desc":"Chips, Rice, Chicken, Curry","price":"\u20ac8.00","img":"new_4_in_1"}]},{"id":"authentic-indian-curries","name":"AUTHENTIC INDIAN CURRIES","subtitle":"VEG \u20ac13 \u00b7 CHICKEN \u20ac14.50 \u00b7 LAMB \u20ac16.50 \u00b7 BEEF \u20ac16.50 \u00b7 PRAWN \u20ac16.50","type":"cards","items":[{"name":"CURRY","allergens":"7-9-10","desc":"Tenderly cooked meat in rich and aromatic tomato-based gravy, prepared with mild traditional spices.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_classic"},{"name":"MADRAS","allergens":"9-10","desc":"Tenderly cooked meat in a spicy and aromatic curry burs with mix authentic tastes of South India.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_madras"},{"name":"VINDALOO","allergens":"9-10-12","desc":"Tenderly cooked meat in a tantalizing blend of spices, chilli, and tangy lemon.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_vindaloo"},{"name":"ROGAN JOSH","allergens":"7-9-10","desc":"Tender chunks of meat with plush strong and silky curry, packed with tomatoes and spices.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_rogan_josh"},{"name":"JALFREZI","allergens":"9-10","desc":"A vibrant medley of stir-fried vegetables or meats in a tangy tomato-based sauce, spiced to perfection.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_jalfrezi"},{"name":"BALTI","allergens":"9-10","desc":"Savoury and aromatic curry cooked in a traditional balti pan, delivering a delightful blend of spices, tender meats, and Fresh vegetables.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_balti"},{"name":"TIKKA MASALA","allergens":"7-8-9-10","desc":"Marinated, grilled chicken chunks in a creamy, typically made with spices.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_tikka_masala"},{"name":"KORMA","allergens":"7-8","desc":"Aromatic curry made with meat simmered in a cream, and a blend of spices.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB","\u20ac16.50"],["BEEF","\u20ac16.50"],["PRAWN","\u20ac16.50"]],"img":"curry_korma"},{"name":"CHEF'S SPECIAL BIRYANI","allergens":"7-8-9-10","desc":"Tantalizing blend of fragrant Basmati Rice, Succulent meat And aromatic spices.","prices":[["VEG","\u20ac13"],["CHICKEN","\u20ac14.50"],["LAMB, BEEF, PRAWN","\u20ac16.50"]],"img":"curry_biryani"}]},{"id":"fish","name":"FISH","subtitle":"","type":"cards","items":[{"name":"COD FISH","allergens":"1-4","desc":"","price":"\u20ac8.00","img":"fish_cod"},{"name":"FISH SUPPER","allergens":"1-4-9-10","desc":"+ Curry Dip","price":"\u20ac10.00","img":"fish_supper"}]},{"id":"kids-menu","name":"KIDS MENU","subtitle":"CHIPS + CAPRI-SUN","type":"cards","items":[{"name":"CHICKEN NUGGETS (5) MEAL","allergens":"1-3","desc":"","price":"\u20ac6.50","img":"kids_nuggets_meal"},{"name":"HAM BURGER MEAL","allergens":"1-3-6-10-11","desc":"","price":"\u20ac6.50","img":"kids_hamburger_meal"},{"name":"CHICKEN POPCORN MEAL","allergens":"1-3","desc":"","price":"\u20ac6.50","img":"kids_popcorn_meal"},{"name":"SAUSAGES MEAL","allergens":"1-6-12","desc":"","price":"\u20ac6.50","img":"kids_sausages_meal"}]},{"id":"fries","name":"FRIES","subtitle":"","type":"cards","items":[{"name":"REGULAR CHIPS","allergens":"","desc":"","price":"\u20ac3.00","img":"fries_regular_chips"},{"name":"LARGE CHIPS","allergens":"","desc":"","price":"\u20ac4.00","img":"fries_large_chips"},{"name":"CURRY CHIPS","allergens":"1-9-10","desc":"","price":"\u20ac4.50","img":"fries_curry_chips"},{"name":"CURRY CHEESE CHIPS","allergens":"1-7-9-10","desc":"","price":"\u20ac5.00","img":"fries_curry_cheese_chips"},{"name":"GARLIC CHIPS","allergens":"3-7-10","desc":"","price":"\u20ac4.50","img":"fries_garlic_chips"},{"name":"GARLIC CHEESE CHIPS","allergens":"3-7-10","desc":"","price":"\u20ac5.00","img":"fries_garlic_cheese_chips"},{"name":"TACO CHIPS","allergens":"3-6-7-9-10","desc":"","price":"\u20ac7.00","img":"fries_taco_chips"},{"name":"CHIPS CHEESE GARLIC BACON","allergens":"3-7-10","desc":"","price":"\u20ac6.50","img":"fries_cheese_garlic_bacon"}]},{"id":"sides","name":"SIDES","subtitle":"Crispy Starters & Extras","type":"text-only","items":[{"name":"CHICKEN GOUJON (5)","allergens":"1-3","desc":"","price":"\u20ac5.50"},{"name":"CHICKEN NUGGETS (8)","allergens":"1-3","desc":"","price":"\u20ac5.50"},{"name":"POPCORN CHICKEN","allergens":"1-3","desc":"","price":"\u20ac5.00"},{"name":"POTATO WEDGES","allergens":"1","desc":"","price":"\u20ac5.50"},{"name":"ONION RINGS (8)","allergens":"1","desc":"","price":"\u20ac5.00"},{"name":"GARLIC MUSHROOM (10)","allergens":"1-3-7","desc":"","price":"\u20ac5.00"},{"name":"PLAIN SAUSAGE","allergens":"1-6-12","desc":"","price":"\u20ac1.50"},{"name":"BATTERED SAUSAGE","allergens":"1-6-12","desc":"","price":"\u20ac2.00"}]},{"id":"curry-sides","name":"CURRY SIDES","subtitle":"Samosas, Fresh Naan & Rice","type":"text-only","items":[{"name":"MEAT SAMOSA (3)","allergens":"1-6-9-10","desc":"","price":"\u20ac5.00"},{"name":"VEG SAMOSA (3)","allergens":"1-9-10","desc":"","price":"\u20ac5.00"},{"name":"PLAIN NAAN BREAD","allergens":"1-3-7","desc":"","price":"\u20ac2.00"},{"name":"GARLIC NAAN BREAD","allergens":"1-3-7","desc":"","price":"\u20ac3.00"},{"name":"CHEESE NAAN","allergens":"1-3-7","desc":"","price":"\u20ac4.00"},{"name":"PESHAWARI NAAN","allergens":"1-3-7-8","desc":"","price":"\u20ac5.50"},{"name":"PILAU RICE","allergens":"7","desc":"","price":"\u20ac3.50"},{"name":"MUSHROOM RICE","allergens":"6-7","desc":"","price":"\u20ac5.00"},{"name":"EGG FRIED RICE","allergens":"3-6","desc":"","price":"\u20ac5.50"},{"name":"PAPODUM","allergens":"10","desc":"","price":"\u20ac3.00"}]},{"id":"sauce-dips","name":"SAUCE DIPS","subtitle":"All Dips \u20ac1.50","type":"text-only","items":[{"name":"GARLIC SAUCE","allergens":"3-7-10","desc":"","price":"\u20ac1.50"},{"name":"CURRY SAUCE","allergens":"1-9-10","desc":"","price":"\u20ac1.50"},{"name":"MAYO SAUCE","allergens":"3-10","desc":"","price":"\u20ac1.50"},{"name":"SWEET CHILLI SAUCE","allergens":"12","desc":"","price":"\u20ac1.50"},{"name":"HOT CHILLI SAUCE","allergens":"12","desc":"","price":"\u20ac1.50"},{"name":"COCKTAIL SAUCE","allergens":"3-10","desc":"","price":"\u20ac1.50"},{"name":"TACO SAUCE","allergens":"3-7-10","desc":"","price":"\u20ac1.50"},{"name":"BBQ SAUCE","allergens":"9-10-12","desc":"","price":"\u20ac1.50"}]},{"id":"dessert","name":"DESSERT","subtitle":"","type":"cards","items":[{"name":"COOKIES","allergens":"1-3-6-7","desc":"A portion of 3 freshly baked cookies.","price":"\u20ac4.00","img":"dessert_cookies"}]},{"id":"drinks","name":"DRINKS","subtitle":"","type":"cards","items":[{"name":"CAN","allergens":"","desc":"Coke / Fanta / 7UP / D. Coke / Exotic Fanta","price":"\u20ac1.99","img":"drink_cans"},{"name":"SHARING DRINKS","allergens":"","desc":"Coke / Fanta / 7UP / D. Coke / Bottles","price":"\u20ac4.00","img":"drink_sharing_bottles"},{"name":"WATER","allergens":"","desc":"","price":"\u20ac1.50","img":"drink_water"},{"name":"CAPRI-SUN","allergens":"","desc":"","price":"\u20ac1.50","img":"drink_capri_sun"}]}];
 
       let activeCategory = 'all';
+      let searchQuery = '';
       let drawerOpen = false;
 
       const overviewSection = document.getElementById('category-overview');
       const overviewGrid = document.getElementById('overview-grid');
       const overviewStatus = document.getElementById('overview-status');
+      const searchInput = document.getElementById('menu-search');
+      const searchClearBtn = document.getElementById('search-clear-btn');
       const stickyNav = document.getElementById('sticky-nav');
       const scrollViewport = document.getElementById('scroll-viewport');
       const categoryBar = document.getElementById('category-bar');
@@ -945,7 +1169,7 @@
 
       function buildCategoryButtonsHtml() {
         return getAllCategories().map(function (cat) {
-          const isActive = cat.id === activeCategory;
+          const isActive = !searchQuery.trim() && cat.id === activeCategory;
           return '<button type="button" role="tab" aria-selected="' + isActive + '" class="cat-btn' + (isActive ? ' active' : '') + '" data-cat="' + escapeHtml(cat.id) + '">' + escapeHtml(cat.name) + '</button>';
         }).join('');
       }
@@ -961,19 +1185,61 @@
         scrollRightBtn.classList.toggle('is-disabled', !canRight);
       }
 
-      function renderCategoryNavs() {
+      function getFilteredSections() {
+        const q = searchQuery.trim().toLowerCase();
+        if (!q) {
+          return activeCategory === 'all'
+            ? MENU_DATA
+            : MENU_DATA.filter(function (cat) { return cat.id === activeCategory; });
+        }
+
+        const results = [];
+        for (let i = 0; i < MENU_DATA.length; i++) {
+          const cat = MENU_DATA[i];
+          const catMatches = cat.name.toLowerCase().indexOf(q) !== -1 ||
+            (cat.subtitle && cat.subtitle.toLowerCase().indexOf(q) !== -1);
+
+          if (catMatches) {
+            results.push(cat);
+            continue;
+          }
+
+          const matchingItems = cat.items.filter(function (item) {
+            return item.name.toLowerCase().indexOf(q) !== -1 ||
+              (item.desc && item.desc.toLowerCase().indexOf(q) !== -1);
+          });
+
+          if (matchingItems.length > 0) {
+            results.push({
+              id: cat.id,
+              name: cat.name,
+              subtitle: cat.subtitle,
+              type: cat.type,
+              items: matchingItems,
+              extraNote: cat.extraNote
+            });
+          }
+        }
+        return results;
+      }
+
+      function renderCategoryNavs(filteredSections) {
         const html = buildCategoryButtonsHtml();
         overviewGrid.innerHTML = html;
         categoryBar.innerHTML = html;
         drawerGrid.innerHTML = html;
 
-        const totalCount = MENU_DATA.reduce(function (sum, c) { return sum + c.items.length; }, 0);
-        if (activeCategory === 'all') {
-          overviewStatus.textContent = MENU_DATA.length + ' Categories · ' + totalCount + ' Items';
+        const q = searchQuery.trim();
+        const sections = filteredSections || getFilteredSections();
+        const visibleCount = sections.reduce(function (sum, c) { return sum + c.items.length; }, 0);
+
+        if (q) {
+          overviewStatus.textContent = visibleCount + (visibleCount === 1 ? ' match' : ' matches') + ' for "' + q + '"';
+        } else if (activeCategory === 'all') {
+          overviewStatus.textContent = MENU_DATA.length + ' Categories · ' + visibleCount + ' Items';
         } else {
           const current = MENU_DATA.find(function (c) { return c.id === activeCategory; });
-          const count = current ? current.items.length : 0;
-          overviewStatus.textContent = (current ? current.name : '') + ' · ' + count + (count === 1 ? ' item' : ' items');
+          overviewStatus.textContent = (current ? current.name : '') + ' · ' + visibleCount + (visibleCount === 1 ? ' item' : ' items');
         }
 
         const activeStickyBtn = categoryBar.querySelector('.cat-btn.active');
@@ -1094,23 +1360,46 @@
         '</section>';
       }
 
-      function renderMenu() {
-        const sections = activeCategory === 'all'
-          ? MENU_DATA
-          : MENU_DATA.filter(function (cat) { return cat.id === activeCategory; });
+      function renderMenu(filteredSections) {
+        const sections = filteredSections || getFilteredSections();
+        if (sections.length === 0) {
+          menuContainer.innerHTML =
+            '<div class="empty-state">' +
+              '<p class="empty-state-title">No dishes or categories found</p>' +
+              '<p class="empty-state-desc">Try searching for pizza, burger, curry, kebab, chips, or clear your search.</p>' +
+              '<button type="button" class="empty-reset-btn" id="empty-reset-btn">Show Full Menu</button>' +
+            '</div>';
+          const resetBtn = document.getElementById('empty-reset-btn');
+          if (resetBtn) {
+            resetBtn.addEventListener('click', clearSearch);
+          }
+          return;
+        }
 
         menuContainer.innerHTML = sections.map(renderSection).join('');
       }
 
+      function refreshView() {
+        const sections = getFilteredSections();
+        renderCategoryNavs(sections);
+        renderMenu(sections);
+        searchClearBtn.classList.toggle('visible', searchQuery.trim().length > 0);
+      }
+
+      function clearSearch() {
+        searchQuery = '';
+        searchInput.value = '';
+        refreshView();
+        searchInput.focus();
+      }
+
       function selectCategory(nextCat, fromSticky) {
         if (!nextCat) return;
-        const changed = nextCat !== activeCategory;
+        searchQuery = '';
+        searchInput.value = '';
         activeCategory = nextCat;
         if (drawerOpen) setDrawerOpen(false);
-        if (changed) {
-          renderCategoryNavs();
-          renderMenu();
-        }
+        refreshView();
 
         if (fromSticky) {
           const stickyHeight = stickyNav.offsetHeight || 56;
@@ -1124,6 +1413,13 @@
         }
         setTimeout(syncStickyVisibility, 60);
       }
+
+      searchInput.addEventListener('input', function () {
+        searchQuery = searchInput.value;
+        refreshView();
+      });
+
+      searchClearBtn.addEventListener('click', clearSearch);
 
       overviewGrid.addEventListener('click', function (e) {
         const btn = e.target.closest('.cat-btn');
@@ -1175,8 +1471,7 @@
         updateScrollIndicators();
       }, { passive: true });
 
-      renderCategoryNavs();
-      renderMenu();
+      refreshView();
       syncStickyVisibility();
     })();
   </script>

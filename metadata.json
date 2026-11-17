@@ -1,0 +1,6 @@
+{
+  "name": "New York Pizza — Passage West, Cork",
+  "description": "Digital restaurant menu for New York Pizza in Passage West, Cork, Ireland featuring Signature Pizzas, Burgers, Kebabs, Baguettes, Wraps, Authentic Indian Curries, Fish, Sides, and Deals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
